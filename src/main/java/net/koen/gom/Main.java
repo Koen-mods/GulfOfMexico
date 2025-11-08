@@ -1,5 +1,7 @@
 package net.koen.gom;
 
+import net.koen.gom.execution.variables.Variable;
+import net.koen.gom.execution.variables.VariableLevel;
 import net.koen.gom.lexing.Keyword;
 import net.koen.gom.lexing.Lexer;
 import net.koen.gom.lexing.Token;
