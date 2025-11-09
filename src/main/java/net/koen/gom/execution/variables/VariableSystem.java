@@ -6,6 +6,15 @@ import java.util.List;
 public class VariableSystem {
     public static List<Variable<?>> Variables = new ArrayList<>();
 
+    public static Variable findVar(String name) {
+        for (Variable var : Variables) {
+            if (var.getName().equals(name)) {
+                return var;
+            }
+        }
+        return null;
+    }
+
     public static boolean createVariable(String name, VariableType type, VariableLevel level, Object value) {
         for (Variable var : Variables) {
             if (var.getName().equals(name)) {
@@ -44,6 +53,49 @@ public class VariableSystem {
                 Variable<Boolean> var = new Variable<>(level, type, name, (Boolean) value);
                 Variables.add(var);
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean editVariable(String name, Object newValue) {
+        Variable var = findVar(name);
+        if (var == null) {
+            System.out.println("No variable with that name present!");
+            return false;
+        } else {
+            VariableType type = var.getType();
+            VariableLevel level = var.getLevel();
+            if (level != VariableLevel.VARCONST && level != VariableLevel.VARVAR) {
+                System.out.println("You can't edit that bro... it's a " + level.name);
+                return false;
+            }
+            switch (type) {
+                case NUMBER -> {
+                    if (!(newValue instanceof Float)) {
+                        System.out.println("Keep it the same type at least, okay?");
+                        return false;
+                    } else {
+                        var.setValue(newValue);
+                        return true;
+                    }
+                } case STRING -> {
+                    if (!(newValue instanceof String)) {
+                        System.out.println("Keep it the same type at least, okay?");
+                        return false;
+                    } else {
+                        var.setValue(newValue);
+                        return true;
+                    }
+                } case BOOLEAN -> {
+                    if (!(newValue instanceof Boolean)) {
+                        System.out.println("Keep it the same type at least, okay?");
+                        return false;
+                    } else {
+                        var.setValue(newValue);
+                        return true;
+                    }
+                }
             }
         }
         return false;
