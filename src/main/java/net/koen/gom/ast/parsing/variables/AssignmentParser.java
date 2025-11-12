@@ -3,6 +3,7 @@ package net.koen.gom.ast.parsing.variables;
 import net.koen.gom.ast.nodes.Node;
 import net.koen.gom.ast.nodes.VariableAssignment;
 import net.koen.gom.ast.parsing.Parser;
+import net.koen.gom.ast.parsing.helpers.inputFiltering;
 import net.koen.gom.execution.variables.Variable;
 import net.koen.gom.execution.variables.VariableLevel;
 import net.koen.gom.execution.variables.VariableSystem;
@@ -14,17 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentParser {
-    protected static List<Token> consumeUntilBang(List<Token> tokens, int start) {
-        int j = start;
-        List<Token> output = new ArrayList<>();
-        while (j < tokens.size() && tokens.get(j).type != TokenType.BANG && tokens.get(j).type != TokenType.QUESTION) {
-            Token t = tokens.get(j);
-            output.add(t);
-            j++;
-        }
-        return output;
-    }
-
     public static int parse(List<Token> input, int i, String word, List<Node> output) {
         Token token = input.get(i);
         VariableLevel level = null;
@@ -32,10 +22,8 @@ public class AssignmentParser {
         String name = null;
         Object value = null;
         boolean var = false;
-        List<Token> untilBang = consumeUntilBang(input, i);
-        List<Token> filtered = untilBang.stream()
-                .filter(t -> t.type != TokenType.SPACE)
-                .toList();
+        List<Token> untilBang = inputFiltering.consumeUntilBang(input, i);
+        List<Token> filtered = inputFiltering.filterSpaces(untilBang);
         if (word.equals("var")) {
             var = true;
         }

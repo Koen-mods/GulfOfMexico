@@ -23,7 +23,7 @@ public class Main {
                     }
             }
         }
-        String code = "const const var1 = 14!\nvar const var2 = var1!";
+        String code = "const const var1 = 14!\nvar const var2 = var1!\nvar2 = 7!";
         List<Token> lexed = Lexer.Lex(code);
         for (Token tok : lexed) {
             System.out.println(tok.toString());
