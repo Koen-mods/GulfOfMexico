@@ -52,7 +52,7 @@ public class Lexer {
                 Token token = null;
                 boolean isKeyword = false;
                 for (int j = i; j < input.length(); j++) {
-                    if (chars[j] == '(' || Character.isWhitespace(chars[j]) || OPERATORS.contains(chars[j]) || STRING_SIGNS.contains(chars[j])) {
+                    if (chars[j] == '(' || Character.isWhitespace(chars[j]) || OPERATORS.contains(chars[j]) || STRING_SIGNS.contains(chars[j]) || chars[j] == '!') {
                         end = j;
                         break;
                     }

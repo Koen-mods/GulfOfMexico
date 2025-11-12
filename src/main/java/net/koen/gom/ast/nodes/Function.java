@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Function {
+public class Function implements Node {
     List<Argument> params;
     CodeBlock code;
 
@@ -25,5 +25,10 @@ public class Function {
             }
         }
         return null;
+    }
+
+    @Override
+    public void execute() {
+        code.execute();
     }
 }
