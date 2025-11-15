@@ -96,7 +96,6 @@ public class AssignmentParser {
         assert name != null;
         assert value != null;
         assert type != null;
-        assert level != null;
         switch (type) {
             case NUMBER -> {
                 VariableAssignment<Float> outputNode = new VariableAssignment<>(name, type, level, (Float) value);
