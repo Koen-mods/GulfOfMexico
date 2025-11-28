@@ -11,6 +11,6 @@ public class DecrementOperation implements ArithmeticOperation {
 
     @Override
     public float eval() {
-        return a + b;
+        return a - b;
     }
 }
