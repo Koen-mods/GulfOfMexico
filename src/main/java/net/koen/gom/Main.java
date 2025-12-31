@@ -14,6 +14,9 @@ public class Main {
                     {
                         k.deleted = true;
                     }
+                case "-v", "--version":
+                    System.out.println("GulfOfMexico interpreter 0.0.1");
+                    return;
             }
         }
         General.testing.variables.simple();
