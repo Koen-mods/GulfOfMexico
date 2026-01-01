@@ -24,4 +24,15 @@ public class inputFiltering {
                 .toList();
         return filtered;
     }
+
+    public static List<Token> consumeUntilLBrace(List<Token> tokens, int start) {
+        int j = start;
+        List<Token> output = new ArrayList<>();
+        while (j < tokens.size() && tokens.get(j).type != TokenType.LBRACE) {
+            Token t = tokens.get(j);
+            output.add(t);
+            j++;
+        }
+        return output;
+    }
 }

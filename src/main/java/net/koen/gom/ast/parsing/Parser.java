@@ -1,7 +1,9 @@
 package net.koen.gom.ast.parsing;
 
+import net.koen.gom.ast.nodes.Function;
 import net.koen.gom.ast.nodes.Node;
 import net.koen.gom.ast.nodes.VariableAssignment;
+import net.koen.gom.ast.parsing.functions.FunctionDeclParser;
 import net.koen.gom.ast.parsing.variables.AssignmentParser;
 import net.koen.gom.ast.parsing.variables.EditParser;
 import net.koen.gom.execution.variables.Variable;
@@ -16,6 +18,7 @@ import java.util.List;
 
 public class Parser {
     public static List<Variable<?>> tempVars = new ArrayList<>();
+    public static List<Function> tempFunctions = new ArrayList<>();
 
     public static Variable<?> findTempVar(String name) {
         for (Variable var : tempVars) {
@@ -35,16 +38,27 @@ public class Parser {
             TokenType type = token.type;
             switch (type) {
                 case IDENTIFIER -> {
-                    int success = EditParser.Parse(input, i, word, output);
-                    if (success == -1) {
-                        return null;
+                    if (input.get(i + 1).type == TokenType.LPAREN) {
+                        // Function parser...
                     } else {
-                        i = success;
+                        int success = EditParser.Parse(input, i, word, output);
+                        if (success == -1) {
+                            return null;
+                        } else {
+                            i = success;
+                        }
                     }
                 } case KEYWORD -> {
                     switch (word) {
                         case "const", "var" -> {
                             int success = AssignmentParser.parse(input, i, word, output);
+                            if (success == -1) {
+                                return null;
+                            } else {
+                                i = success;
+                            }
+                        } case "function" -> {
+                            int success = FunctionDeclParser.Parse(input, i, output);
                             if (success == -1) {
                                 return null;
                             } else {

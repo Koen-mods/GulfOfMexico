@@ -5,10 +5,11 @@ import net.koen.gom.execution.variables.VariableSystem;
 import net.koen.gom.execution.variables.VariableType;
 
 public class VariableAssignment<T> implements Node {
-    String name;
+    public String name;
     VariableType type;
     VariableLevel level;
     T value;
+    boolean resolvesToFunction = false;
 
     public VariableAssignment(String name, VariableType type, VariableLevel level, T value) {
         this.name = name;
@@ -17,8 +18,17 @@ public class VariableAssignment<T> implements Node {
         this.value = value;
     }
 
+    public void MarkRemoved() {
+        this.resolvesToFunction = true;
+    }
+
+    public boolean isResolvedToFunction() {
+        return resolvesToFunction;
+    }
+
     @Override
     public void execute() {
+        if (resolvesToFunction) return;
         VariableSystem.createVariable(name, type, level, value);
     }
 }

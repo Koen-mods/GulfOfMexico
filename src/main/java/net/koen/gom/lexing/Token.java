@@ -5,14 +5,16 @@ public class Token {
     public final String lexeme;   // The raw text (e.g., "if", "(", "123")
     public final Object literal;  // For numbers, strings, etc.
     public final int position;    // Where it appeared
+    public final int line;
     public int leadingSpaces;     // For arithmetic operations, to set the order
 
     // Constructor method
-    public Token(TokenType type, String lexeme, Object literal, int position) {
+    public Token(TokenType type, String lexeme, Object literal, int position, int line) {
         this.type = type;
         this.lexeme = lexeme;
         this.literal = literal;
         this.position = position;
+        this.line = line;
     }
 
     // Method to parse the token to a String, example output: KEYWORD if null
