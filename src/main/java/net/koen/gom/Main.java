@@ -19,6 +19,6 @@ public class Main {
                     return;
             }
         }
-        General.testing.functions.simple();
+        General.testing.functions.call();
     }
 }

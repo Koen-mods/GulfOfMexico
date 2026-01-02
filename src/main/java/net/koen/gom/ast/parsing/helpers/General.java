@@ -2,8 +2,11 @@ package net.koen.gom.ast.parsing.helpers;
 
 import net.koen.gom.ast.nodes.Node;
 import net.koen.gom.ast.parsing.Parser;
+import net.koen.gom.execution.ParameterBinding;
+import net.koen.gom.execution.functions.Function;
 import net.koen.gom.execution.variables.Variable;
 import net.koen.gom.execution.variables.VariableSystem;
+import net.koen.gom.execution.variables.VariableType;
 import net.koen.gom.lexing.Lexer;
 import net.koen.gom.lexing.Token;
 
@@ -42,6 +45,14 @@ public class General {
                 for (Variable var : VariableSystem.Variables) {
                     System.out.println("Name: " + var.getName() + "\n" + "Value: " + var.getValue());
                 }
+            }
+
+            public static void call() {
+                String code = "var var var1 = 1!";
+                List<Token> lexed = Lexer.Lex(code);
+                Function func = new Function(lexed, "testingFunc", List.of("name"));
+                ParameterBinding<String> name = new ParameterBinding<String>("Koen", "name", VariableType.STRING);
+                func.call(name, new ParameterBinding<Float>(4f, "times", VariableType.NUMBER));
             }
         }
     }

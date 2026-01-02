@@ -1,15 +1,10 @@
 package net.koen.gom.ast.parsing;
 
-import net.koen.gom.ast.nodes.Function;
 import net.koen.gom.ast.nodes.Node;
-import net.koen.gom.ast.nodes.VariableAssignment;
 import net.koen.gom.ast.parsing.functions.FunctionDeclParser;
 import net.koen.gom.ast.parsing.variables.AssignmentParser;
 import net.koen.gom.ast.parsing.variables.EditParser;
 import net.koen.gom.execution.variables.Variable;
-import net.koen.gom.execution.variables.VariableLevel;
-import net.koen.gom.execution.variables.VariableSystem;
-import net.koen.gom.execution.variables.VariableType;
 import net.koen.gom.lexing.Token;
 import net.koen.gom.lexing.TokenType;
 
@@ -18,7 +13,7 @@ import java.util.List;
 
 public class Parser {
     public static List<Variable<?>> tempVars = new ArrayList<>();
-    public static List<Function> tempFunctions = new ArrayList<>();
+    // public static List<Function> tempFunctions = new ArrayList<>();
 
     public static Variable<?> findTempVar(String name) {
         for (Variable var : tempVars) {
