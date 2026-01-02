@@ -1,5 +1,7 @@
 package net.koen.gom.ast.nodes;
 
+import net.koen.gom.execution.functions.Function;
+import net.koen.gom.execution.functions.FunctionStorage;
 import net.koen.gom.lexing.Token;
 
 import java.util.List;
@@ -8,7 +10,7 @@ public class FunctionDeclaration implements Node {
     List<String> parameters;
     String name;
     List<Token> code;
-    // Function func;
+    Function func;
 
     public FunctionDeclaration(String name, List<Token> code, List<String> parameters) {
         this.name = name;
@@ -25,6 +27,6 @@ public class FunctionDeclaration implements Node {
             System.out.println(tok.toString());
         }
 
-
+        FunctionStorage.createFunction(this.name, this.code, this.parameters);
     }
 }
