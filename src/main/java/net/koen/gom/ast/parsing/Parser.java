@@ -59,6 +59,8 @@ public class Parser {
                             } else {
                                 i = success;
                             }
+                        } case "if" -> {
+
                         }
                     }
                 }

@@ -13,6 +13,15 @@ public final class ComparatorExpression<T extends Comparable<T>> implements Bool
 
     @Override
     public boolean evaluate() {
+        if (left instanceof String) {
+            if (operator.equals("==")) {
+                return left.equals(right);
+            } else if (operator.equals(";=")) {
+                return !left.equals(right);
+            } else {
+                throw new IllegalArgumentException("Invalid operator for string: " + operator);
+            }
+        }
         int cmp = left.compareTo(right);
         return switch (operator) {
             case ">" -> cmp > 0;
